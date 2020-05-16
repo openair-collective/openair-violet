@@ -1,8 +1,6 @@
 # openair-violet
-This is our first open hardware DACC machine
+We are working off of the designs provided by Dr Tao Wang to produce the first designs for the OpenAir Voilent, the worlds first open hardware Direct Air Carbon Capture (DACC) Machine.
 
 This is very much a work in progress, but below if the diagram of what we are putting together.
-
-We believe there was an issue on 03/07/20 was that we had not properly prepped the Sorbent Beads (line 2 in the LOM), but understand the issue and should be able to correct it the next time we are able to test.
 
 ![DACC Diagram](https://github.com/openair-collective/openair-violet/blob/master/DACC.png?raw=true)
