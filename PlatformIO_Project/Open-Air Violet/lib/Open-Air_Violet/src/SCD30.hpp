@@ -42,7 +42,7 @@ class AirSensor : public SCD30
 {
 public:
     AirSensor();
-    ~AirSensor();
+    virtual ~AirSensor();
     void setupSensor();
     void loopSensor();
 
