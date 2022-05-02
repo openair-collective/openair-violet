@@ -1,7 +1,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/openair-collective/openair-violet?style=plastic)](https://github.com/openair-collective/openair-violet/issues) [![GitHub forks](https://img.shields.io/github/forks/openair-collective/openair-violet?style=plastic)](https://github.com/openair-collective/openair-violet/network) [![GitHub stars](https://img.shields.io/github/stars/openair-collective/openair-violet?style=plastic)](https://github.com/openair-collective/openair-violet/stargazers) [![GitHub license](https://img.shields.io/github/license/openair-collective/openair-violet?style=plastic)](https://github.com/openair-collective/openair-violet/blob/master/LICENSE)
 
 <p align="center">
-   <img width="550px" height="150px" title="Open-Air-Logo" src="imgs/openair-logo.png">
+   <img width="550px" height="150px" title="Open-Air-Logo" src="./docs/assets/images/openair-logo.png">
 </p>
 
 ---
@@ -14,7 +14,7 @@ We are working off of the designs provided by ***`Dr Tao Wang`*** to produce the
 
 This is *very much* a work in progress, below is the current diagram of what we are putting together.
 
-![DACC Diagram](/imgs/DACC.png/)
+![DACC Diagram](/./docs/assets/images/DACC.png/)
 
 - [:seedling: openair-violet :seedling:](#seedling-openair-violet-seedling)
 - [What is this Project?](#what-is-this-project)
