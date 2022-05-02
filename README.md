@@ -20,12 +20,10 @@ This is *very much* a work in progress, below is the current diagram of what we 
 - [What is this Project?](#what-is-this-project)
   - [Where We are Going](#where-we-are-going)
   - [How to get involved?](#how-to-get-involved)
-  - [How to setup](#how-to-setup)
   - [Main Project Folder](#main-project-folder)
   - [Source Files](#source-files)
   - [OpenAir CO2 Visualizer](#openair-co2-visualizer)
   - [List of Materials](#list-of-materials)
-    - [Project Goals and To Do](#project-goals-and-to-do)
 
 # What is this Project?
 
@@ -53,32 +51,6 @@ Check out the [Materials](#list-of-materials) section to see what is required to
 
 PCB's can be ordered from `JLCPCB` or `PCBWay`, or *made yourself*. The PCB files are still in prototype phase and we welcome any development ideas.
 
-## How to setup
-
-Setup is very straight forward, thankfully. You will need to purchase a few components before you begin:
-
----
-<p align="center">
------------- BELOW IS AN EXAMPLE SETUP ----------------
-</p>
-
----
-
-***Materials for purchase***
-
-1. Raspberrypi - any model
-   1. Install Mosquito broker to the pi and connect it to your network
-2. 12V submersable water pump
-3. 3m or more of Vinyl tubing with 10mm ID and 13mm OD
-
-***SETUP***
-
-1. Acquire PCB and ESP32 (WROVER and WROOM has both been tested).
-2. Acquire The remaining sensors and components - assemble
-3. Plug ESP32 into computer - open your IDE (i used Thonny for this project) Flash the micropython firmware to the esp32
-   1. Upload ESP32MicropytyhonLibraries ---> rename to ESP32Micro
-   2. Upload boot.py and greenhouse.py to root directory
-
 ## Main Project Folder
 
 [Project Directory](/Code/Open-Air_Violet_PlatformIO/)
@@ -100,12 +72,7 @@ Setup is very straight forward, thankfully. You will need to purchase a few comp
     <b>Further Reading</b>
 </summary>
 
-### Project Goals and To Do
-
-Located below is an extensive check list of goals and to-do items for the project.
-
-- [ ] Here is an example item.
-- [x] Here is an example checked item.
+ More info Coming Soon!
 
 </details>
 
