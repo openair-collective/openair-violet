@@ -38,17 +38,18 @@
 #include <Wire.h> // Change to TinyI2C for more performance
 #include <SparkFun_SCD30_Arduino_Library.h>
 
-class AirSensor : public SCD30
+class SCD30_AirSensor
 {
 public:
-    AirSensor();
-    virtual ~AirSensor();
-    void setupSensor();
-    void loopSensor();
+  SCD30_AirSensor();
+  virtual ~SCD30_AirSensor();
+  void begin();
+  void loopSensor();
 
 private:
-    // private stuff goes here
+  // private stuff goes here
+  SCD30 _sd30;
 };
 
-extern AirSensor airsensor;
+extern SCD30_AirSensor SCD30_airsensor;
 #endif
