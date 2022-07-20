@@ -8,9 +8,11 @@
 
 #include <defines.hpp>
 #include <WiFi.h>
+#include <SPIFFS.h>
 #include <ESPAsyncWebServer.h>
 #include <AsyncTCP.h>
-#include "data/project_config.hpp"
+#include "data/config/project_config.hpp"
+#include "data/StateManager/StateManager.hpp"
 
 extern WiFiClient espClient;
 
@@ -25,13 +27,12 @@ public:
     void SetupWebServer();
     void SetupServer();
     void networkRoutes();
-    void CheckNetworkLoop();
+    bool CheckNetworkLoop();
     void CheckConnectionLoop_Active();
     bool LoopWifiScan();
 
     // variables
 private:
-    int CheckWifiState();
     // Timer variables
     unsigned long _previousMillis;
     const long _interval; // interval to wait for Wi-Fi connection (milliseconds)

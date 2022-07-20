@@ -1,0 +1,26 @@
+{
+  "name": "openair-violet",
+  "version": "1.0.0",
+  "description": "Control and data display webapp for OpenAir-Violet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openair-collective/openair-violet.git"
+  },
+  "keywords": [
+    "openair",
+    "violet",
+    "CDR",
+    "data",
+    "webapp"
+  ],
+  "author": "ZanzyTHEbar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/openair-collective/openair-violet/issues"
+  },
+  "homepage": "https://github.com/openair-collective/openair-violet#readme"
+}

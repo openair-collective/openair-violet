@@ -9,6 +9,7 @@ public:
     Project_Config();
     virtual ~Project_Config();
     bool begin();
+    void saveConfig();
     void createConfig();
     bool loadConfig();
     void printConfig();
@@ -16,18 +17,26 @@ public:
 public:
     struct Config_t
     {
-        const char *config_version;
-        const char *project_name;
+        const char *ssid;
+        const char *password;
+        const char *hostname;
+        const char *serverName;
+        byte numTempSensors;
+    };
+
+    struct CopyRightInfo_t
+    {
         const char *project_version;
+        const char *project_name;
         const char *project_author;
         const char *project_description;
         const char *project_url;
         const char *project_creator_email;
         const char *project_license;
         const char *project_copyright;
-        const char *ssid;
-        const char *password;
     };
+
+    CopyRightInfo_t copyRightInfo_t;
 
     Config_t config_t;
 

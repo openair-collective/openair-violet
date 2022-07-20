@@ -104,7 +104,7 @@ void Network::networkRoutes()
         request->send(response); });
 
     // Route to set GPIO state to LOW
-    server.on("/toggle", HTTP_GET, [&](AsyncWebServerRequest *request)
+    /* server.on("/toggle", HTTP_GET, [&](AsyncWebServerRequest *request)
               {
                     int params = request->params();
                     for(int i=0;i<params;i++)
@@ -119,11 +119,10 @@ void Network::networkRoutes()
                         }
                         log_i("GET[%s]: %s\n", p->name().c_str(), p->value().c_str());
                     }
-                    request->send(200, MIMETYPE_JSON, "toggled"); });
+                    request->send(200, MIMETYPE_JSON, "toggled"); }); */
 
     server.on("/data.json", HTTP_GET, [&](AsyncWebServerRequest *request)
               {
-                  cfg.config.data_json = true;
                   my_delay(1L);
                   String temp = cfg.config.data_json_string;
                   request->send(200, MIMETYPE_JSON, temp);
@@ -158,7 +157,7 @@ bool Network::SetupNetworkStack()
     String PASS;
 
     project_config.loadConfig();
-    if (!cfg.loadConfig())
+    if (!project_config.loadConfig())
     {
         log_i("[INFO]: Failed to load config\n");
         return false;
@@ -166,22 +165,19 @@ bool Network::SetupNetworkStack()
 
     log_i("[INFO]: Loaded config\n");
     // Load values saved in SPIFFS
-    SSID = cfg.config.WIFISSID;
-    PASS = cfg.config.WIFIPASS;
-
     if (!PRODUCTION)
     {
         // print it on the serial monitor
-        log_i("%s\n", PASS.c_str());
+        log_i("%s\n", project_config.config_t.password);
     }
 
-    if (SSID[0] == '\0' || PASS[0] == '\0')
+    if (project_config.config_t.ssid[0] == '\0' || project_config.config_t.password[0] == '\0')
     {
         log_i("[INFO]: No SSID or password has been set.\n");
         log_i("[INFO]: Please configure the Wifi Manager by scanning the QR code on your device.\r\n");
         return false;
     }
-    log_i("[INFO]: Configured SSID: %s\r\n", SSID.c_str());
+    log_i("[INFO]: Configured SSID: %s\r\n", project_config.config_t.ssid);
 
     // Set your Gateway IP address
     IPAddress localIP;
@@ -201,28 +197,28 @@ bool Network::SetupNetworkStack()
 
     WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
 
-    WiFi.setHostname(cfg.config.hostname); // define hostname
+    WiFi.setHostname(project_config.config_t.hostname); // define hostname
 
-    WiFi.begin(cfg.config.WIFISSID, cfg.config.WIFIPASS);
+    WiFi.begin(project_config.config_t.ssid, project_config.config_t.password); // connect to wifi network
 
     unsigned long currentMillis = millis();
     _previousMillis = currentMillis;
 
     while (WiFi.status() != WL_CONNECTED)
     {
-        stateManager.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Connecting);
+        stateManager_WiFi.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Connecting);
         currentMillis = millis();
         if (currentMillis - _previousMillis >= _interval)
         {
             log_i("[INFO]: WiFi connection timed out.\n");
-            stateManager.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Error);
+            stateManager_WiFi.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Error);
             return false;
         }
     }
 
     log_i("[INFO]: Connected to WiFi.\n");
     log_i("IP address: %s\n", WiFi.localIP().toString().c_str());
-    stateManager.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Connected);
+    stateManager_WiFi.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Connected);
     return true;
 }
 
@@ -235,7 +231,7 @@ void Network::SetupWebServer()
     if (SetupNetworkStack())
     {
         networkRoutes();
-        log_i("ESP32GreenHouseDIY HMS server started\n");
+        log_i("OpenAir Violet server started\n");
     }
     else
     {
@@ -276,31 +272,20 @@ void Network::SetupWebServer()
  * Parameters: None
  * Return: None
  ******************************************************************************/
-void Network::CheckNetworkLoop()
+bool Network::CheckNetworkLoop()
 {
-    // run current function every 5 seconds
-    if (WiFi.status() != WL_CONNECTED)
-    {
-        _wifiConnected = false;
-        log_i("Wifi is not connected\n");
-    }
-    else
-    {
-        _wifiConnected = true;
-        log_i("Wifi is connected\n");
-        log_i("[INFO]: WiFi Connected! Open http://%s in your browser\n", WiFi.localIP().toString().c_str());
-    }
+    stateManager_WiFi.setState((WiFi.status() != WL_CONNECTED) ? ProgramStates::DeviceStates::WiFiState_e::WiFiState_Disconnected : ProgramStates::DeviceStates::WiFiState_e::WiFiState_Connected);
+    return (stateManager_WiFi.getCurrentState() == ProgramStates::DeviceStates::WiFiState_e::WiFiState_Connected) ? true : false;
 }
 
 void Network::CheckConnectionLoop_Active()
 {
     unsigned long currentMillis = millis();
     // if WiFi is down, try reconnecting
-    if (!_wifiConnected && (currentMillis - _previousMillis >= _interval))
+    if (stateManager_WiFi.getCurrentState() == ProgramStates::DeviceStates::WiFiState_e::WiFiState_Disconnected && (currentMillis - _previousMillis >= _interval))
     {
-        Serial.print(millis());
-        Serial.println("Reconnecting to WiFi...");
-        WiFi.disconnect(); // disconnect from previous Access Point's - if connected
+        log_i("WiFi is disconnected, reconnecting...\n");
+        WiFi.disconnect();
         WiFi.reconnect();
         _previousMillis = currentMillis;
     }
