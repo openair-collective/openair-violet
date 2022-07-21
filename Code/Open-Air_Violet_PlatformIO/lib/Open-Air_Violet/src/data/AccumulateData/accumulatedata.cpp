@@ -27,11 +27,11 @@ void AccumulateData::loopSensors()
     tower_temp.getTempC();
     
     // Relays
-    for (int i = 0; i < sizeof(cfg.config.relays_pin) / sizeof(cfg.config.relays_pin[0]); i++)
+    /* for (int i = 0; i < sizeof(cfg.config.relays_pin) / sizeof(cfg.config.relays_pin[0]); i++)
     {
         Relay.RelayOnOff(cfg.config.relays_pin[i], cfg.config.relays[i]);
         log_d("Relay on pin: %d is %s", cfg.config.relays_pin[i], cfg.config.relays[i] ? "on" : "off");
-    }
+    } */
 }
 
 bool AccumulateData::SendData()
@@ -84,12 +84,12 @@ bool AccumulateData::SendData()
         temp_sensor_data.add(tower_temp.temp_sensor_results.temp[i]);
     }
 
-    // Relays
+    /* // Relays
     JsonArray Relays = jsonDoc.createNestedArray("Tower_Relays_State");
     for (int i = 0; i < sizeof(cfg.config.relays) / sizeof(cfg.config.relays[0]); i++)
     {
         Relays.add(cfg.config.relays[i]);
-    }
+    } */
 
     if (serializeJson(jsonDoc, json) == 0)
     {
@@ -99,7 +99,7 @@ bool AccumulateData::SendData()
 
     if (json.length() > 0)
     {
-        cfg.config.data_json_string = json;
+        //cfg.config.data_json_string = json;
         serializeJsonPretty(jsonDoc, json);
         log_d("[Data Json Document]: %s", json.c_str());
         return true;

@@ -21,6 +21,7 @@ bool NetworkFirebase::begin_firebase()
     if (!Firebase.signUp(&config, &auth, "", ""))
     {
         log_e("%s\n", config.signer.signupError.message.c_str());
+        return false;
     }
 
     log_i("[Firebase] Sign up success");
@@ -31,6 +32,7 @@ bool NetworkFirebase::begin_firebase()
 
     Firebase.begin(&config, &auth);
     Firebase.reconnectWiFi(true);
+    return true;
 }
 
 /**

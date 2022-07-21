@@ -66,7 +66,7 @@ bool Project_Config::loadConfig()
         return false;
     }
 
-    config.read("project_config", config_t);
+    //config.read("project_config", config_t);
 
     config.read("project_name", copyRightInfo_t.project_name);
     config.read("project_version", copyRightInfo_t.project_version);
@@ -92,6 +92,11 @@ void Project_Config::printConfig()
     Serial.printf("project_copyright: %s \n", copyRightInfo_t.project_copyright);
     
     Serial.printf("ssid: %s \n", config_t.ssid);
+}
+
+void Project_Config::eraseConfig()
+{
+    config.clear();
 }
 
 Project_Config project_config;

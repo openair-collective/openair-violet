@@ -13,27 +13,28 @@ public:
     void createConfig();
     bool loadConfig();
     void printConfig();
+    void eraseConfig();
 
 public:
     struct Config_t
     {
-        const char *ssid;
-        const char *password;
-        const char *hostname;
-        const char *serverName;
+        char *ssid;
+        char *password;
+        char *hostname;
+        char *serverName;
         byte numTempSensors;
     };
 
     struct CopyRightInfo_t
     {
-        const char *project_version;
-        const char *project_name;
-        const char *project_author;
-        const char *project_description;
-        const char *project_url;
-        const char *project_creator_email;
-        const char *project_license;
-        const char *project_copyright;
+        char *project_version;
+        char *project_name;
+        char *project_author;
+        char *project_description;
+        char *project_url;
+        char *project_creator_email;
+        char *project_license;
+        char *project_copyright;
     };
 
     CopyRightInfo_t copyRightInfo_t;

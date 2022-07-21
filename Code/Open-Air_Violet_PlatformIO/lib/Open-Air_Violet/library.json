@@ -1,0 +1,20 @@
+{
+    "name": "OpenAir-Project-Library",
+    "description": "OpenAir-Project-Library",
+    "keywords": "OpenAir-Project-Library",
+    "authors": {
+        "name": "ZanzyTHEbar",
+        "maintainer": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/openair-collective/"
+    },
+    "version": "0.0.1",
+    "license": "MIT",
+    "frameworks": "arduino",
+    "platforms": [
+        "espressif8266",
+        "espressif32"
+    ]
+}

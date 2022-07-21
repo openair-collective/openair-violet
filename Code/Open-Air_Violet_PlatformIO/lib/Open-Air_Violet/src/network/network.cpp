@@ -121,16 +121,16 @@ void Network::networkRoutes()
                     }
                     request->send(200, MIMETYPE_JSON, "toggled"); }); */
 
-    server.on("/data.json", HTTP_GET, [&](AsyncWebServerRequest *request)
+    /* server.on("/data.json", HTTP_GET, [&](AsyncWebServerRequest *request)
               {
                   my_delay(1L);
                   String temp = cfg.config.data_json_string;
                   request->send(200, MIMETYPE_JSON, temp);
-                  temp = ""; });
+                  temp = ""; }); */
 
     server.on("/api/reset/config", HTTP_GET, [&](AsyncWebServerRequest *request)
               {
-                  cfg.resetConfig();
+                  project_config.eraseConfig();
                   request->send(200); });
 
     server.on("/api/reset/device", HTTP_GET, [&](AsyncWebServerRequest *request)
