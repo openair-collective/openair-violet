@@ -21,5 +21,8 @@ export default defineConfig({
     '@store': resolve(__dirname, 'src/store'),
     '@actions': resolve(__dirname, 'src/actions'),
     '@models': resolve(__dirname, 'src/models'),
+  },
+  define: {
+    'process.env': process.env
   }
 })

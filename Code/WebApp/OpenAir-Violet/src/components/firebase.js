@@ -1,9 +1,9 @@
-import firebasedata from './utils/firebasedata'
+import firebasedata from '../utils/firebasedata';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 //import { auth } from "firebase/auth";
-//import { database } from 'firebase/database';
+import { getDatabase } from 'firebase/database';
 //import { firestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
@@ -25,20 +25,18 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
-const db = getFirestore(firebase);
+export const db = getDatabase(firebase);
+
+/* const db = getFirestore(firebase);
 
 const analytics = getAnalytics(firebase);
 
 const dataFloatPath = firebasedata.data_paths.float;
 const dataIntPath = firebasedata.data_paths.int;
 
-// Variables to save database current values
-var floatReading;
-var intReading;
-
 async function getData(db) {
     const dataCol = collection(db, 'test');
     const dataSnapshot = await getDocs(dataCol);
     const dataList = dataSnapshot.docs.map(doc => doc.data());
     return dataList;
-}
+} */
