@@ -1,0 +1,6 @@
+{
+    "data_paths": {
+        "float": "test/float",
+        "int": "data/int"
+    }
+}
