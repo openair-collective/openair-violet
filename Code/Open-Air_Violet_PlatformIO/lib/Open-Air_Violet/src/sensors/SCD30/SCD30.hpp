@@ -2,10 +2,10 @@
 
   Initial testing of the SD30 CO2 sensor for openair-violet
 
-  Attempts to send the C02 ppm every second accross a serial
+  Attempts to send the C02 ppm every second across a serial
   port so it is availble to visualized for by the associated process sketch.
 
-  Requires the SD30 Ardunio Lib.
+  Requires the SD30 Arduino Lib.
 
   Based off the sample detailed below:
 
@@ -43,13 +43,12 @@ class SCD30_AirSensor
 public:
   SCD30_AirSensor();
   virtual ~SCD30_AirSensor();
-  void begin();
+  bool begin();
   void loopSensor();
 
 private:
-  // private stuff goes here
   SCD30 _sd30;
 };
 
-extern SCD30_AirSensor SCD30_airsensor;
+extern SCD30_AirSensor SCD30_airSensor;
 #endif

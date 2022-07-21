@@ -18,23 +18,23 @@ public:
 public:
     struct Config_t
     {
-        char *ssid;
-        char *password;
-        char *hostname;
-        char *serverName;
+        char ssid[32];
+        char password[50];
+        char hostname[100];
+        char serverName[100];
         byte numTempSensors;
     };
 
     struct CopyRightInfo_t
     {
-        char *project_version;
-        char *project_name;
-        char *project_author;
-        char *project_description;
-        char *project_url;
-        char *project_creator_email;
-        char *project_license;
-        char *project_copyright;
+        char project_version[10];
+        char project_name[32];
+        char project_author[50];
+        char project_description[300];
+        char project_url[1000];
+        char project_creator_email[1000];
+        char project_license[10];
+        char project_copyright[1000];
     };
 
     CopyRightInfo_t copyRightInfo_t;

@@ -17,5 +17,5 @@ private:
     int _co2;
     int _rc;
 };
-extern K30_AirSensor K30_airsensor;
+extern K30_AirSensor K30_airSensor;
 #endif // K30_HPP

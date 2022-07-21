@@ -18,7 +18,6 @@ public:
             Stopping,
             Stopped,
             Error
-
         };
 
         enum WiFiState_e
@@ -60,6 +59,16 @@ public:
             PUMP_SERIAL_REPORT,
             PUMP_Error
         };
+
+        enum DatabaseState_e
+        {
+            DatabaseState_None,
+            DatabaseState_Starting,
+            DatabaseState_Started,
+            DatabaseState_Stopping,
+            DatabaseState_Stopped,
+            DatabaseState_Error
+        };
     };
 };
 
@@ -98,5 +107,6 @@ extern StateManager<ProgramStates::DeviceStates::WiFiState_e> stateManager_WiFi;
 extern StateManager<ProgramStates::DeviceStates::WebServerState_e> stateManager_WebServer;
 extern StateManager<ProgramStates::DeviceStates::ButtonState_e> stateManager_Buttons;
 extern StateManager<ProgramStates::DeviceStates::PumpState_e> stateManager_Pump;
+extern StateManager<ProgramStates::DeviceStates::DatabaseState_e> stateManager_Database;
 
 #endif // STATEMANAGER_HPP

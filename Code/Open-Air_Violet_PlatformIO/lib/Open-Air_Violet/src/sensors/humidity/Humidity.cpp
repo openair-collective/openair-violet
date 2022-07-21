@@ -1,5 +1,7 @@
 #include "Humidity.hpp"
 
+//!TODO: Add support for multiple boards to log data - currently only supports one board, the ESP32
+
 // Global Variables
 #if USE_SHT31_SENSOR
 Adafruit_SHT31 sht31;

@@ -19,22 +19,24 @@ bool Project_Config::begin()
 
 void Project_Config::createConfig()
 {
-    copyRightInfo_t = {
-        .project_version = "",
-        .project_name = "",
-        .project_author = "",
-        .project_description = "",
-        .project_url = "",
-        .project_creator_email = "",
-        .project_license = "",
-        .project_copyright = "",
+    /* copyRightInfo_t = {
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
     };
 
     config_t = {
-        .ssid = "",
-        .password = "",
-        .serverName = "",
-    };
+        "",
+        "",
+        "",
+        "",
+        0,
+    }; */
 }
 
 void Project_Config::saveConfig()
@@ -66,7 +68,7 @@ bool Project_Config::loadConfig()
         return false;
     }
 
-    //config.read("project_config", config_t);
+    // config.read("project_config", config_t);
 
     config.read("project_name", copyRightInfo_t.project_name);
     config.read("project_version", copyRightInfo_t.project_version);
@@ -90,7 +92,7 @@ void Project_Config::printConfig()
     Serial.printf("project_creator_email: %s \n", copyRightInfo_t.project_creator_email);
     Serial.printf("project_license: %s \n", copyRightInfo_t.project_license);
     Serial.printf("project_copyright: %s \n", copyRightInfo_t.project_copyright);
-    
+
     Serial.printf("ssid: %s \n", config_t.ssid);
 }
 

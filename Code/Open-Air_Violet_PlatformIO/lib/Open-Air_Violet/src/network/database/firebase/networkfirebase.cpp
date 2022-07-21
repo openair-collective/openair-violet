@@ -1,10 +1,14 @@
 #include "networkfirebase.hpp"
+// Provide the token generation process info.
+#include "addons/TokenHelper.h"
+// Provide the RTDB payload printing info and other helper functions.
+#include "addons/RTDBHelper.h"
 
 // Define Firebase Data object
 FirebaseData fbdata;
 
 FirebaseAuth auth;
-FirebaseConfig config;
+FirebaseConfig firebaseconfig;
 
 NetworkFirebase::NetworkFirebase() : _auth_ok(false), _sendDataPreviousMillis(0), _sendDataInterval(0) {}
 
@@ -12,15 +16,15 @@ NetworkFirebase::~NetworkFirebase() {}
 
 bool NetworkFirebase::begin_firebase()
 {
-    config.api_key = FIREBASE_API_KEY;
+    firebaseconfig.api_key = FIREBASE_API_KEY;
 
     /* Assign the RTDB URL (required) */
-    config.database_url = FIREBASE_DATABASE_URL;
+    firebaseconfig.database_url = FIREBASE_DATABASE_URL;
 
     /* Sign up */
-    if (!Firebase.signUp(&config, &auth, "", ""))
+    if (!Firebase.signUp(&firebaseconfig, &auth, "", ""))
     {
-        log_e("%s\n", config.signer.signupError.message.c_str());
+        log_e("%s\n", firebaseconfig.signer.signupError.message.c_str());
         return false;
     }
 
@@ -28,9 +32,9 @@ bool NetworkFirebase::begin_firebase()
     _auth_ok = true;
 
     /* Assign the callback function for the long running token generation task */
-    config.token_status_callback = tokenStatusCallback; // see addons/TokenHelper.h
+    firebaseconfig.token_status_callback = tokenStatusCallback; // see addons/TokenHelper.h
 
-    Firebase.begin(&config, &auth);
+    Firebase.begin(&firebaseconfig, &auth);
     Firebase.reconnectWiFi(true);
     return true;
 }
@@ -65,3 +69,5 @@ void NetworkFirebase::process_firebase()
         log_i("[Firebase] PASSED - PATH: %s, TYPE: %s", fbdata.dataType().c_str(), fbdata.dataPath().c_str());
     }
 }
+
+NetworkFirebase networkFirebase;

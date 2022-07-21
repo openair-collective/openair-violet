@@ -153,9 +153,6 @@ void Network::networkRoutes()
  */
 bool Network::SetupNetworkStack()
 {
-    String SSID;
-    String PASS;
-
     project_config.loadConfig();
     if (!project_config.loadConfig())
     {

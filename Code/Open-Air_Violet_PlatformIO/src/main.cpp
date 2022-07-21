@@ -5,22 +5,28 @@
 #include <sensors/SCD30/SCD30.hpp>
 #endif // SCD30_SUPPORT
 
+#include "network/network.hpp"
+#include "network/database/firebase/networkfirebase.hpp"
+
 void setup()
 {
   Serial.begin(BAUD_RATE);
 #if SCD30_SUPPORT
-  SCD30_airsensor.begin();
+  SCD30_airSensor.begin();
 #endif // SCD30_SUPPORT
-  // put your setup code here, to run once:
+  network.SetupServer(); // initialise the server file system and print details of the network
+  network.SetupWebServer(); // initialise the web server
+  networkFirebase.begin_firebase(); // initialise the firebase
 }
 
 void loop()
 {
 #if K30_SUPPORT
-  K30_airsensor.loopSensor();
+  K30_airSensor.loopSensor();
 #endif // K30_SUPPORT
 #if SCD30_SUPPORT
-  SCD30_airsensor.loopSensor();
+  SCD30_airSensor.loopSensor();
 #endif // SCD30_SUPPORT
-  // put your main code here, to run repeatedly:
+  network.CheckNetworkLoop(); // check the network loop
+  networkFirebase.process_firebase(); // process the firebase
 }

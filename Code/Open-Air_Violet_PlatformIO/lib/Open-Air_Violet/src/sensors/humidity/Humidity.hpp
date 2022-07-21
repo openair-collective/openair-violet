@@ -21,13 +21,13 @@
 // Feather HUZZAH ESP8266 note: use pins 3, 4, 5, 12, 13 or 14 --
 // Pin 15 can work but DHT must be disconnected during program upload.
 
-#if (USE_DHT11)
+#if USE_DHT11
 #define DHTTYPE DHT11 // DHT 11
-#elif (USE_DHT22)
+#elif USE_DHT22
 #define DHTTYPE DHT22 // DHT 22 (AM2302)
-#elif (USE_DHT21)
-#define DHTTYPE DHT22 // DHT 22 (AM2302)
-#endif
+#elif USE_DHT21
+#define DHTTYPE DHT21 // DHT 22 (AM2301)
+#endif // USE_DHT11
 
 #endif // USE_DHT_SENSOR
 
@@ -78,7 +78,7 @@ private:
 #if USE_SHT31_SENSOR
   bool _enableHeater;
   int _loopCnt;
-  byte _HUMIDITY_SENSORS_ACTIVE;
+  byte _HUMIDITY_SENSORS_ACTIVE; //! TODO: Change this to an enum
 #endif // USE_SHT31_SENSOR
 };
 extern Humidity humidity;
