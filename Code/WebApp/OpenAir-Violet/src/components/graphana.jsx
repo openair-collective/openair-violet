@@ -1,7 +1,7 @@
 import React from 'react'
 
 //configuration file that has the values stored for users
-import config from './utils/config'
+import config from '../utils/userconfig'
 
 class Dashboard extends React.Component {
     render() {
