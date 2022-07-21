@@ -2,7 +2,7 @@
 
 ## How to setup the dev environment
 
->**Note:** you must have NodeJS and npm installed on your computer
+> **Note**: you must have NodeJS and npm installed on your computer
 
     1. `cd OpenAir-Violet`
     2. Run the `npm install` command
@@ -14,7 +14,7 @@ There is Hot Module Reloading, so you can edit the code and see the changes imme
 
 ## How to setup the production environment
 
->**Note:** you can only deploy the PWA to the live link if you are logged in with my account currently - please do not try to deploy yet. 
+> **Note**: you can only deploy the PWA to the live link if you are logged in with my account currently - please do not try to deploy yet.
 > Eventually we will migrate to a dedicated account and server for this, but for now, you can upload to the github, and i will deploy to the live link.
 
     1. `cd OpenAir-Violet`
