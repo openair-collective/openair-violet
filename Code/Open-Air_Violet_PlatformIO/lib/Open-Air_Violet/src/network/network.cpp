@@ -57,6 +57,20 @@ Network::Network() : _previousMillis(0),
  */
 Network::~Network() {}
 
+void wifiClear()
+{
+    WiFi.disconnect();
+    stateManager_WiFi.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Disconnected);
+    delay(100);
+}
+
+void wifiDisconnect()
+{
+    WiFi.disconnect();
+    WiFi.mode(WIFI_OFF);
+    stateManager_WiFi.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Disconnected);
+}
+
 void notFound(AsyncWebServerRequest *request)
 {
     log_i("NOT_FOUND: ");
@@ -145,6 +159,8 @@ void Network::networkRoutes()
     server.begin();
 }
 
+
+
 /**
  * @brief
  *
@@ -161,28 +177,29 @@ bool Network::SetupNetworkStack()
     }
 
     log_i("[INFO]: Loaded config\n");
-    // Load values saved in SPIFFS
+
     if (!PRODUCTION)
     {
         // print it on the serial monitor
         log_i("%s\n", project_config.config_t.password);
     }
 
-    if (project_config.config_t.ssid[0] == '\0' || project_config.config_t.password[0] == '\0')
+    if (project_config.config_t.ssid[0] == '\0')
     {
-        log_i("[INFO]: No SSID or password has been set.\n");
+        log_i("[INFO]: No SSID has been set.\n");
         log_i("[INFO]: Please configure the Wifi Manager by scanning the QR code on your device.\r\n");
         return false;
     }
     log_i("[INFO]: Configured SSID: %s\r\n", project_config.config_t.ssid);
 
     // Set your Gateway IP address
-    IPAddress localIP;
-    IPAddress gateway;
-    IPAddress subnet;
 
     WiFi.mode(WIFI_STA);
-    /* localIP.fromString(WiFi.localIP().toString());
+
+    /*IPAddress localIP;
+    IPAddress gateway;
+    IPAddress subnet;
+     localIP.fromString(WiFi.localIP().toString());
     gateway.fromString(WiFi.gatewayIP().toString());
     subnet.fromString(WiFi.subnetMask().toString());
 
@@ -193,10 +210,13 @@ bool Network::SetupNetworkStack()
     } */
 
     WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
-
     WiFi.setHostname(project_config.config_t.hostname); // define hostname
-
-    WiFi.begin(project_config.config_t.ssid, project_config.config_t.password); // connect to wifi network
+    WiFi.setSleep(false);
+    WiFi.begin(project_config.config_t.ssid, (project_config.config_t.password[0]  == '\0') ? NULL : project_config.config_t.password); // connect to wifi network
+    WiFi.persistent(false);
+    WiFi.setAutoConnect(false);
+    WiFi.setAutoReconnect(true);
+    WiFi.setTxPower(WIFI_POWER_2dBm);
 
     unsigned long currentMillis = millis();
     _previousMillis = currentMillis;
@@ -209,6 +229,7 @@ bool Network::SetupNetworkStack()
         {
             log_i("[INFO]: WiFi connection timed out.\n");
             stateManager_WiFi.setState(ProgramStates::DeviceStates::WiFiState_e::WiFiState_Error);
+            wifiClear();
             return false;
         }
     }
@@ -333,7 +354,6 @@ void Network::SetupServer()
 bool Network::LoopWifiScan()
 {
     log_i("[INFO]: Beginning WIFI Network\n");
-
     // WiFi.scanNetworks will return the number of networks found
     int n = WiFi.scanNetworks();
     log_i("[INFO]: scan done\n");

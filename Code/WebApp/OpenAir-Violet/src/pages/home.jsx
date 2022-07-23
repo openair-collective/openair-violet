@@ -26,7 +26,7 @@ import { uid } from 'uid';
 import { set, ref, onValue, remove, update } from 'firebase/database';
 
 const uiDefaults = {
-  APPBAR_HEIGHT: 1000,
+  APPBAR_HEIGHT: 64,
 }
 const useStyles = makeStyles(theme => ({
   root: {
@@ -205,8 +205,6 @@ const FullWidthGrid = ({ toggleDark, settoggleDark }) => {
     </Container>
   );
 }
-
-
 
 function HomePage() {
   const [toggleDark, settoggleDark] = React.useState(false);
