@@ -1,0 +1,28 @@
+abstract: '<p>The <strong>openair-violet</strong> is the first open hardware <em>Direct
+  Air Carbon Capture</em>&nbsp;<em><strong>(DACC)</strong></em>&nbsp;<em>Machine </em>created
+  by the OpenAir Collective.</p>
+
+  <p><strong>This project is not currently under development; this is an archived
+  repository.</strong></p>'
+authors:
+- affiliation: '@NYUGameCenter'
+  family-names: Matt Parker
+- affiliation: New York University
+  family-names: Feddersen
+  given-names: Jeff
+- affiliation: Parse.ly
+  family-names: Alexander Ose
+- affiliation: The OpenAir Collective
+  family-names: Neidl
+  given-names: Christopher
+- family-names: Collins
+  given-names: Kristina
+  orcid: 0000-0002-3816-1948
+cff-version: 1.2.0
+date-released: '2024-02-12'
+doi: 10.5281/zenodo.10652313
+license:
+- cc-by-4.0
+title: 'Violet: Open Hardware Direct Air Carbon Capture (DACC) Machine'
+version: v1.0.0
+url: "https://github.com/openair-collective/openair-violet"
