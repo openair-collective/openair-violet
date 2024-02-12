@@ -8,7 +8,7 @@
 
 # :seedling: openair-violet :seedling:
 
-This repo is dedicated to the **openair-violet**, the worlds first open hardware *Direct Air Carbon Capture* ***(DACC)*** *Machine* :cactus: .
+This repo is dedicated to the **openair-violet**, the world's first open hardware *Direct Air Carbon Capture* ***(DACC)*** *Machine* :cactus: .
 
 We are working off of the designs provided by ***`Dr Tao Wang`*** to produce the first designs for the **OpenAir Violet**.
 
